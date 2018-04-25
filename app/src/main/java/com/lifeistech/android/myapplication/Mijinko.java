@@ -8,21 +8,29 @@ public class Mijinko {
     double length;
     double muscle;
     int fatigue;
-    int calorie;
+
     int protain;
     int sleep;
-    Mijinko(double length,double muscle){
+    int energy;
+    int calcium;
+    int fat;
+
+    Mijinko(double length,double muscle,int protain,int sleep,int energy,int calcium,int fat){
         this.length=length;
         this.muscle=muscle;
         fatigue=0;
-        protain=0;
-        sleep=0;
-        calorie=0;
+
+        this.protain=protain;
+        this.sleep=sleep;
+        this.energy=energy;
+        this.calcium=calcium;
+        this.fat=fat;
+
     }
 
-    void meal(int protain,int calor){
+    void meal(int protain,int energy){
         this.protain=protain;
-        this.calorie=calorie;
+        this.energy=energy;
     }
 
     void walk(double kyori){

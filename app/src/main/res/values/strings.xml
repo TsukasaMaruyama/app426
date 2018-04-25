@@ -1,3 +1,51 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">朝型ミジンコ育成ゲーム<!--My Application--></string>
+
+    <integer name="esanum">7</integer>
+
+    <string name="name0">ミドリムシ</string>
+    <integer name="protain0">20</integer>
+    <integer name="energy0">10</integer>
+    <integer name="calcium0">0</integer>
+    <integer name="fat0">0</integer>
+
+    <string name="name1">牛乳</string>
+    <integer name="protain1">30</integer>
+    <integer name="energy1">10</integer>
+    <integer name="calcium1">60</integer>
+    <integer name="fat1">15</integer>
+
+    <string name="name2">白ごはん</string>
+    <integer name="protain2">0</integer>
+    <integer name="energy2">60</integer>
+    <integer name="calcium2">0</integer>
+    <integer name="fat2">0</integer>
+
+    <string name="name3">にんじん</string>
+    <integer name="protain3">0</integer>
+    <integer name="energy3">5</integer>
+    <integer name="calcium3">0</integer>
+    <integer name="fat3">0</integer>
+
+    <string name="name4">肉</string>
+    <integer name="protain4">100</integer>
+    <integer name="energy4">30</integer>
+    <integer name="calcium4">0</integer>
+    <integer name="fat4">50</integer>
+
+    <string name="name5">しょうが焼き</string>
+    <integer name="protain5">80</integer>
+    <integer name="energy5">30</integer>
+    <integer name="calcium5">0</integer>
+    <integer name="fat5">30</integer>
+
+    <string name="name6">プロテイン</string>
+    <integer name="protain6">130</integer>
+    <integer name="energy6">40</integer>
+    <integer name="calcium6">30</integer>
+    <integer name="fat6">20</integer>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -1,5 +1,7 @@
 package com.lifeistech.android.myapplication;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.support.v7.app.AppCompatActivity;
@@ -97,6 +99,9 @@ public class walkActivity extends AppCompatActivity implements LocationListener 
     public void quit(View v){
         Intent intent=new Intent(this,MainActivity.class);
         Toast.makeText(this,String.format("%.1fkm",walk.kyori)+"散歩しました",Toast.LENGTH_SHORT).show();
+        SharedPreferences pre = getSharedPreferences("data", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=pre.edit();
+        pre.getFloat("walk",(float)walk.kyori);
         startActivity(intent);
         Intent submit=new Intent(this,MainActivity.class);
         submit.putExtra("kyori",walk.kyori);

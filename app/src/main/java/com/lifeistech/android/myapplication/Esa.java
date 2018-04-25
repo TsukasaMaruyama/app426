@@ -5,14 +5,16 @@ package com.lifeistech.android.myapplication;
  */
 
 public class Esa {
+    int esaID;
     int imageID;//画像のid
 
     String name;
     int protein;
     int calorie;
+    int calcium;
     int fat;
 
     public Esa(int id){
-        imageID=id;
+        esaID=id;
     }
 }

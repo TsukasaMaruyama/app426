@@ -1,9 +1,13 @@
 package com.lifeistech.android.myapplication;
 
+import android.app.FragmentManager;
+//import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
@@ -15,20 +19,17 @@ import android.widget.TextView;
 import java.lang.Math;
 import android.util.Log;
 import android.content.Intent;
-
-import android.app.ActivityManager.RunningAppProcessInfo;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.app.ActivityManager;
 import android.widget.Toast;
-import java.util.List;
+import android.content.SharedPreferences;
+import android.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView muscleView;
     TextView lengthView;
 
+    BlankFragment fragment;
     ImageView imageView;
     ImageView esa;
     int e=0;
@@ -64,8 +65,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+
+
+        SharedPreferences pre=getSharedPreferences("data", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=pre.edit();
+
         handler=new Handler();
-        mijinko=new Mijinko(1.000,0.1);
+        mijinko=new Mijinko(pre.getFloat("length",1.0f),pre.getFloat("muscle",0.1f),pre.getInt("protain",0),pre.getInt("sleep",0),pre.getInt("energy",0),pre.getInt("calcium",0),pre.getInt("fat",0));
         layout=new LinearLayout.LayoutParams((int)(mijinko.length*100),(int)(mijinko.length*100));
         imageView=(ImageView)findViewById(R.id.imageView);
         imageView.setImageResource(R.drawable.daphnia);
@@ -74,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.imageView).startAnimation(AnimationUtils.loadAnimation(this, R.anim.a));
         handler=new Handler();
 
-
         muscleView=(TextView)findViewById(R.id.muscleView);
         lengthView=(TextView)findViewById(R.id.lengthView);
         Log.d("checknull " ,""+ lengthView);
@@ -82,24 +88,7 @@ public class MainActivity extends AppCompatActivity {
         muscleView.setText("マッチョ度："+String.valueOf(String.format("%.2f",mijinko.muscle*100))+"%");
         lengthView.setText("身長："+String.valueOf(String.format("%.4f",mijinko.length)+"nm"));
 
-        /*
-        ActivityManager activityManager = (ActivityManager)getSystemService(ACTIVITY_SERVICE);
-        // 起動中のアプリ情報を取得
-        List<RunningAppProcessInfo> runningApp = activityManager.getRunningAppProcesses();
-        PackageManager packageManager = getPackageManager();
-        if(runningApp != null) {
-            for(RunningAppProcessInfo app : runningApp) {
-                try {
-                    // アプリ名をリストに追加
-                    ApplicationInfo appInfo = packageManager.getApplicationInfo(app.processName, 0);
-                    Log.d("appinfo",(String) packageManager.getApplicationLabel(appInfo));
-                    Toast.makeText(this,(String) packageManager.getApplicationLabel(appInfo),Toast.LENGTH_SHORT).show();
-                }
-                catch(NameNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
-        }*/
+        sycledebug("onCreate");
     }
 
     @Override
@@ -107,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Intent get=getIntent();
         mijinko.walk(get.getIntExtra("kyori",0));
-       //mijinko.walk(10000);
         Log.d("onResume","happened"+mijinko.fatigue);
+        sycledebug("onResume");
     }
     public void esayari(View v){
         if(e!=-100) {
@@ -133,4 +122,31 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(this,esaGetActivity.class);
         startActivity(intent);
     }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        sycledebug("onStart");
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        sycledebug("onDestroy");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        sycledebug("onPause");
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        sycledebug("onStop");
+    }
+
+    private void sycledebug(String status){
+        Toast.makeText(this,"Mainactivity:"+status,Toast.LENGTH_SHORT).show();
+        Log.d("Mainactivity",status);
+    }
+
 }
